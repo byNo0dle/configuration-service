@@ -5,6 +5,9 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Esto es la clase Configuration.
+ */
 @Builder
 @Data
 @Document(collection = "configurations")
@@ -19,12 +22,26 @@ public class Configuration {
 
   @Override
   public String toString() {
-    return "Configuration [" +
-        "idConfiguration='" + idConfiguration + '\'' +
-        ", costMaintenance=" + costMaintenance +
-        ", quantityMovement=" + quantityMovement +
-        ", quantityCredit=" + quantityCredit +
-        ", specifyDate='" + specifyDate + '\'' +
+    return "Configuration ["
+        +
+        "idConfiguration='"
+        + idConfiguration
+        +
+        '\''
+        +
+        ", costMaintenance="
+        + costMaintenance
+        +
+        ", quantityMovement="
+        + quantityMovement
+        +
+        ", quantityCredit="
+        + quantityCredit
+        +
+        ", specifyDate='"
+        + specifyDate
+        + '\''
+        +
         "]";
   }
 }

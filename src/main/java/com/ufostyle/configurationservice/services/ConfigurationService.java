@@ -10,6 +10,9 @@ import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Esto es la clase ConfigurationService.
+ */
 @Service
 public class ConfigurationService {
 
