@@ -1,0 +1,189 @@
+openapi: 3.0.0
+info:
+  title: Configuration API
+  version: 1.0.0
+  description: API for managing bank configurations. BootCamp Microservices 49.
+  contact:
+    name: No0dl3 Support
+    url: https://github.com/byNo0dle
+servers:
+  - url: http://localhost:9003/api
+    description: Configuration Service
+paths:
+  /configuration:
+    get:
+      tags:
+        - Configuration
+      summary: Find all Configuration
+      operationId: findAllConfiguration
+      responses:
+        '200':
+          description: List of Configurations retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SetUpCs'
+        '400':
+          description: Bad Request invalid syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCsError'
+        '404':
+          description: Not Found Configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCsError'
+    post:
+      tags:
+        - Configuration
+      summary: Add a new Configuration to the bank
+      description: Add a new Configuration to the bank
+      operationId: saveConfiguration
+      requestBody:
+        description: Create a new Configuration in the bank
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUpCs'
+        required: true
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCs'
+        '400':
+          description: Bad Request invalid syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCsError'
+        '404':
+          description: Not Found Configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCsError'
+    put:
+      tags:
+        - Configuration
+      summary: Update an existing Configuration
+      description: Update an existing Configuration by Id
+      operationId: updateConfiguration
+      requestBody:
+        description: Update an existent Configuration in the bank
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUpCs'
+        required: true
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCs'
+        '400':
+          description: Bad Request invalid syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCsError'
+        '404':
+          description: Not Found Configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCsError'
+  /configuration/{idConfiguration}:
+    get:
+      tags:
+        - Configuration
+      summary: Find Configuration by ID
+      description: Returns a single Configuration
+      operationId: findByIdConfiguration
+      parameters:
+        - name: idConfiguration
+          in: path
+          description: ID of Configuration to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCs'
+        '400':
+          description: Bad Request invalid syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCsError'
+        '404':
+          description: Not Found Configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCsError'
+    delete:
+      tags:
+        - Configuration
+      summary: Deletes a Configuration
+      description: Delete a Configuration
+      operationId: deleteConfiguration
+      parameters:
+        - name: idConfiguration
+          in: path
+          description: Configuration id to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Not Content Configuration
+        '404':
+          description: Not Found Configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpCsError'
+
+components:
+  schemas:
+    SetUpCs:
+      type: object
+      properties:
+        idConfiguration:
+          type: string
+          example: 65xd2dx0x7d11d2x20827638
+        costMaintenance:
+          type: number
+          example: 150
+        quantityMovement:
+          type: integer
+          example: 5
+        quantityCredit:
+          type: integer
+          example: 5000
+        specifyDate:
+          type: string
+          example: 03-02-2014
+    SetUpCsError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
